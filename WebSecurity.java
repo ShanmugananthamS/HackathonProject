@@ -32,11 +32,12 @@ public class WebSecurity {
 		
 	}
 
+	@SuppressWarnings({ "deprecation", "removal" })
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/addProfile").hasRole("STAFF")
-				.antMatchers("/updateProfile").hasAnyRole("ADMIN","STAFF")
+				.requestMatchers("/addProfile").hasRole("STAFF")
+				.requestMatchers("/updateProfile").hasAnyRole("ADMIN","STAFF")
 				.anyRequest().authenticated().and().httpBasic();
 		return http.build();
 	}
